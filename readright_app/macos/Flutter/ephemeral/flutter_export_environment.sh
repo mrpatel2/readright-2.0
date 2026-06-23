@@ -1,7 +1,8 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\Users\leebu\Documents\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\leebu\Downloads\readright_app"
+export "FLUTTER_ROOT=/opt/homebrew/share/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/mihir/Downloads/4150/ReadRight 2.0/readright-2.0/readright_app"
+export "FLUTTER_FRAMEWORK_SWIFT_PACKAGE_PATH=/Users/mihir/Downloads/4150/ReadRight 2.0/readright-2.0/readright_app/macos/Flutter/ephemeral/Packages/.packages/FlutterFramework"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"

@@ -18,12 +18,15 @@ buildable plan for all three pillars so M3 is implementation only.
   duration by syllable count, per-word accuracy surfaced to the student.
 - **AI Story Builder:** teacher picks a Dolch list + optional theme from the dashboard, gets
   a 3–5 sentence story with target words highlighted, story persists to Firestore.
-- **Dolch games:** one working game — Fill the Blank — wired to the existing mastery/
-  `AttemptRecord` model.
+- **Dolch games:** Fill the Blank (P0 — the MVP minimum) wired to the existing mastery/
+  `AttemptRecord` model. Flash Dash (P1, added to the pillar in the latest Extension
+  Proposal revision) is a stretch goal for M3 if Fill the Blank lands with time to spare —
+  we are not committing to both as the M3 minimum bar, to avoid the exact scope creep this
+  PRD exists to prevent.
 
-**Explicitly NOT built this phase (M2):** the production Story Builder UI, Fill the Blank,
-per-word accuracy visualization, adaptive recording duration, or Azure integration fixes.
-M2 delivers the proxy + one proven spike story only — see Section 5.
+**Explicitly NOT built this phase (M2):** the production Story Builder UI, either Dolch
+game, per-word accuracy visualization, adaptive recording duration, or Azure integration
+fixes. M2 delivers the proxy + one proven spike story only — see Section 5.
 
 ---
 

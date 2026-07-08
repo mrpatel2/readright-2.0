@@ -47,3 +47,6 @@ readright_app/.gradle/
 # Secrets - never commit API keys / backend credentials
 .env
 *.env
+
+# Node (backend proxy)
+node_modules/

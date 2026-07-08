@@ -6,3 +6,44 @@ readright_app/.gradle/
 *.apk
 *.aab
 
+# Flutter/Dart/Pub related
+**/doc/api/
+**/.flutter-plugin-dependencies
+**/.packages
+**/build/
+**/.pub-cache/
+**/.pub/
+**/flutter_export_environment.sh
+
+# iOS related
+**/ios/Flutter/.last_build_id
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Pods/
+**/ios/.symlinks/
+
+# macOS related
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+**/macos/.symlinks/
+
+# Linux/Windows related
+**/linux/flutter/ephemeral/
+**/windows/flutter/ephemeral/
+
+# IDE
+*.iml
+.idea/
+
+# Secrets - never commit API keys / backend credentials
+.env
+*.env

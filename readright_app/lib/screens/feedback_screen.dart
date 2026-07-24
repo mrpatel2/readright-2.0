@@ -68,14 +68,15 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   children: [
                     const MascotWidget(size: 120, animated: true),
                     const SizedBox(height: 20),
-                    Icon(Icons.emoji_events,
-                        size: 60, color: Colors.amber.shade600),
+                    Icon(
+                      Icons.emoji_events,
+                      size: 60,
+                      color: Colors.amber.shade600,
+                    ),
                     const SizedBox(height: 16),
                     Text(
                       "Great Job!",
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayMedium
+                      style: Theme.of(context).textTheme.displayMedium
                           ?.copyWith(color: Colors.orange.shade700),
                     ),
                     const SizedBox(height: 12),
@@ -100,7 +101,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     final double completeness = latest.completeness;
 
     // Same scoring formula as before
-    final double score = (accuracy * 0.6) + (fluency * 0.2) + (completeness * 0.2);
+    final double score =
+        (accuracy * 0.6) + (fluency * 0.2) + (completeness * 0.2);
 
     Color scoreColor;
     String scoreEmoji;
@@ -188,15 +190,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               ),
               child: Column(
                 children: [
-                  Text(
-                    scoreEmoji,
-                    style: const TextStyle(fontSize: 50),
-                  ),
+                  Text(scoreEmoji, style: const TextStyle(fontSize: 50)),
                   const SizedBox(height: 12),
                   const Text(
                     "Your Score",
-                    style:
-                    TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -231,7 +229,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -258,7 +257,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               Card(
                 color: Colors.blue.shade50,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
+                  borderRadius: BorderRadius.circular(16),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -266,7 +266,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       Text(
                         "We heard you say:",
                         style: TextStyle(
-                            fontSize: 16, color: Colors.grey.shade700),
+                          fontSize: 16,
+                          color: Colors.grey.shade700,
+                        ),
                       ),
                       const SizedBox(height: 8),
                       Text(
@@ -303,10 +305,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           Expanded(
             child: Text(
               label,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),

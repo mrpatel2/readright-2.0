@@ -36,7 +36,10 @@ void main() {
     test('duration is always clamped within a sane range', () {
       for (final word in ['a', 'the', 'beautiful', 'extraordinarily', '']) {
         final duration = timing.recordingDurationFor(word);
-        expect(duration, greaterThanOrEqualTo(const Duration(milliseconds: 1800)));
+        expect(
+          duration,
+          greaterThanOrEqualTo(const Duration(milliseconds: 1800)),
+        );
         expect(duration, lessThanOrEqualTo(const Duration(milliseconds: 5200)));
       }
     });

@@ -12,11 +12,11 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  testWidgets('FeedbackScreen shows empty placeholder', (WidgetTester tester) async {
+  testWidgets('FeedbackScreen shows empty placeholder', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: FeedbackScreen(studentId: 'abc'),
-      ),
+      const MaterialApp(home: FeedbackScreen(studentId: 'abc')),
     );
 
     // Let async loadLatest() finish

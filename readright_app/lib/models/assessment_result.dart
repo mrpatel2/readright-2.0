@@ -8,7 +8,7 @@ class AssessmentResult {
   final String provider;
 
   final String recognizedText; // Azure DisplayText
-  final double score;          // Weighted overall score
+  final double score; // Weighted overall score
 
   // False when no provider was able to actually score the attempt (e.g. the
   // cloud assessor is unreachable). Callers must treat an ungraded result as

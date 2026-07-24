@@ -111,8 +111,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
   void _skipWord() {
     if (_isRecording) return;
 
-    int nextIndex =
-    _wordList.indexWhere((w) => !w.mastered, _currentIndex + 1);
+    int nextIndex = _wordList.indexWhere((w) => !w.mastered, _currentIndex + 1);
 
     if (nextIndex == -1) {
       nextIndex = _wordList.indexWhere((w) => !w.mastered);
@@ -275,7 +274,9 @@ class _PracticeScreenState extends State<PracticeScreen> {
                 child: Text(
                   _feedback,
                   style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w600),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -294,15 +295,17 @@ class _PracticeScreenState extends State<PracticeScreen> {
             children: [
               const MascotWidget(size: 120, animated: true),
               const SizedBox(height: 24),
-              const Icon(Icons.celebration_rounded,
-                  size: 80, color: Colors.amber),
+              const Icon(
+                Icons.celebration_rounded,
+                size: 80,
+                color: Colors.amber,
+              ),
               const SizedBox(height: 20),
               Text(
                 '🎉 Amazing Work! 🎉',
-                style: Theme.of(context)
-                    .textTheme
-                    .displayMedium
-                    ?.copyWith(color: Colors.orange.shade700),
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  color: Colors.orange.shade700,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 12),
@@ -331,14 +334,15 @@ class _PracticeScreenState extends State<PracticeScreen> {
               color: Colors.amber.shade50,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24),
-                side:
-                BorderSide(color: Colors.orange.shade300, width: 3),
+                side: BorderSide(color: Colors.orange.shade300, width: 3),
               ),
               child: Container(
                 width: double.infinity,
                 constraints: const BoxConstraints(maxWidth: 400),
                 padding: const EdgeInsets.symmetric(
-                    vertical: 32.0, horizontal: 24.0),
+                  vertical: 32.0,
+                  horizontal: 24.0,
+                ),
                 child: Column(
                   children: [
                     Text(
@@ -376,18 +380,22 @@ class _PracticeScreenState extends State<PracticeScreen> {
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 400),
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 12),
+                  horizontal: 20,
+                  vertical: 12,
+                ),
                 decoration: BoxDecoration(
-                  color: _feedback.contains('Excellent') ||
-                      _feedback.contains('🌟')
+                  color:
+                      _feedback.contains('Excellent') ||
+                          _feedback.contains('🌟')
                       ? Colors.green.shade100
                       : _feedback.contains('Skipped')
                       ? Colors.blue.shade100
                       : Colors.orange.shade100,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                    color: _feedback.contains('Excellent') ||
-                        _feedback.contains('🌟')
+                    color:
+                        _feedback.contains('Excellent') ||
+                            _feedback.contains('🌟')
                         ? Colors.green.shade300
                         : _feedback.contains('Skipped')
                         ? Colors.blue.shade300
@@ -400,8 +408,9 @@ class _PracticeScreenState extends State<PracticeScreen> {
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: _feedback.contains('Excellent') ||
-                        _feedback.contains('🌟')
+                    color:
+                        _feedback.contains('Excellent') ||
+                            _feedback.contains('🌟')
                         ? Colors.green.shade800
                         : _feedback.contains('Skipped')
                         ? Colors.blue.shade800
@@ -417,10 +426,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
             const SizedBox(height: 20),
 
             // Tiger recording button
-            RecordPlaceholder(
-              isRecording: _isRecording,
-              onTap: _startPractice,
-            ),
+            RecordPlaceholder(isRecording: _isRecording, onTap: _startPractice),
 
             const SizedBox(height: 16),
 
@@ -428,15 +434,19 @@ class _PracticeScreenState extends State<PracticeScreen> {
             OutlinedButton.icon(
               onPressed: _isRecording ? null : _skipWord,
               icon: const Icon(Icons.skip_next, size: 24),
-              label: const Text('Skip This Word',
-                  style: TextStyle(fontSize: 16)),
+              label: const Text(
+                'Skip This Word',
+                style: TextStyle(fontSize: 16),
+              ),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 14),
-                side: BorderSide(
-                    color: Colors.orange.shade300, width: 2),
+                  horizontal: 20,
+                  vertical: 14,
+                ),
+                side: BorderSide(color: Colors.orange.shade300, width: 2),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16)),
+                  borderRadius: BorderRadius.circular(16),
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -451,9 +461,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
         // Success animation overlay
         if (_showSuccess)
           Positioned.fill(
-            child: IgnorePointer(
-              child: StarBurst(play: _showSuccess),
-            ),
+            child: IgnorePointer(child: StarBurst(play: _showSuccess)),
           ),
       ],
     );

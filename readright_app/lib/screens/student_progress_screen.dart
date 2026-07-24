@@ -12,10 +12,7 @@ import '../services/analytics_service.dart';
 class StudentProgressScreen extends StatefulWidget {
   final String studentId;
 
-  const StudentProgressScreen({
-    super.key,
-    required this.studentId,
-  });
+  const StudentProgressScreen({super.key, required this.studentId});
 
   @override
   State<StudentProgressScreen> createState() => _StudentProgressScreenState();
@@ -49,8 +46,12 @@ class _StudentProgressScreenState extends State<StudentProgressScreen> {
 
   Future<void> _loadData() async {
     setState(() => _isLoading = true);
-    final attempts = await StudentSessionService.getAttemptsForStudent(widget.studentId);
-    final analytics = await _analyticsService.calculateStudentAnalytics(widget.studentId);
+    final attempts = await StudentSessionService.getAttemptsForStudent(
+      widget.studentId,
+    );
+    final analytics = await _analyticsService.calculateStudentAnalytics(
+      widget.studentId,
+    );
     if (mounted) {
       setState(() {
         _recentAttempts = attempts;
@@ -63,7 +64,9 @@ class _StudentProgressScreenState extends State<StudentProgressScreen> {
   Future<void> _playAudio(String? path) async {
     if (path == null || path.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No audio recording found for this attempt.')),
+        const SnackBar(
+          content: Text('No audio recording found for this attempt.'),
+        ),
       );
       return;
     }
@@ -72,9 +75,9 @@ class _StudentProgressScreenState extends State<StudentProgressScreen> {
       await _audioPlayer.play(DeviceFileSource(path));
     } catch (e) {
       print("Error playing audio: $e");
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not play audio.')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Could not play audio.')));
     }
   }
 
@@ -106,8 +109,9 @@ class _StudentProgressScreenState extends State<StudentProgressScreen> {
         context: context,
         builder: (_) => AlertDialog(
           title: const Text("Invalid Date Range"),
-          content:
-          const Text("End date must be the same or after the start date."),
+          content: const Text(
+            "End date must be the same or after the start date.",
+          ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
@@ -128,8 +132,10 @@ class _StudentProgressScreenState extends State<StudentProgressScreen> {
       59,
     );
 
-    final path = await _progressService
-        .exportAttemptsPDFToAndroidDownloads(_start!, adjustedEnd);
+    final path = await _progressService.exportAttemptsPDFToAndroidDownloads(
+      _start!,
+      adjustedEnd,
+    );
 
     if (!mounted) return;
 
@@ -139,7 +145,7 @@ class _StudentProgressScreenState extends State<StudentProgressScreen> {
         title: const Text("PDF Export Complete"),
         content: Text(
           "Your PDF report has been saved to:\n\n$path\n\n"
-              "Open your device's 'Download' folder to view it.",
+          "Open your device's 'Download' folder to view it.",
         ),
         actions: [
           TextButton(
@@ -158,82 +164,101 @@ class _StudentProgressScreenState extends State<StudentProgressScreen> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (_studentAnalytics != null)
-              _buildAnalyticsSection(_studentAnalytics!),
-            const SizedBox(height: 16),
-            const Text("Recent Attempts", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 8),
-            _recentAttempts.isEmpty
-                ? const Text("No recent attempts found for this student.")
-                : ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: _recentAttempts.length,
-              itemBuilder: (context, index) {
-                final attempt = _recentAttempts[index];
-                final hasAudio = attempt.audioPath != null && attempt.audioPath!.isNotEmpty;
-                return Card(
-                  child: ListTile(
-                    title: Text(attempt.word),
-                    subtitle: Text(DateFormat.yMMMd().add_jms().format(attempt.timestamp)),
-                    trailing: hasAudio
-                        ? IconButton(
-                      icon: const Icon(Icons.play_circle_outline),
-                      onPressed: () => _playAudio(attempt.audioPath),
-                    )
-                        : const Icon(Icons.mic_off_outlined, color: Colors.grey),
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (_studentAnalytics != null)
+                    _buildAnalyticsSection(_studentAnalytics!),
+                  const SizedBox(height: 16),
+                  const Text(
+                    "Recent Attempts",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                );
-              },
-            ),
-            const Divider(height: 32, thickness: 1),
-            const Text("Export Full History", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                const Text("Start: "),
-                Expanded(
-                  child: Text(
-                    _start == null ? "Not set" : _df.format(_start!),
+                  const SizedBox(height: 8),
+                  _recentAttempts.isEmpty
+                      ? const Text("No recent attempts found for this student.")
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: _recentAttempts.length,
+                          itemBuilder: (context, index) {
+                            final attempt = _recentAttempts[index];
+                            final hasAudio =
+                                attempt.audioPath != null &&
+                                attempt.audioPath!.isNotEmpty;
+                            return Card(
+                              child: ListTile(
+                                title: Text(attempt.word),
+                                subtitle: Text(
+                                  DateFormat.yMMMd().add_jms().format(
+                                    attempt.timestamp,
+                                  ),
+                                ),
+                                trailing: hasAudio
+                                    ? IconButton(
+                                        icon: const Icon(
+                                          Icons.play_circle_outline,
+                                        ),
+                                        onPressed: () =>
+                                            _playAudio(attempt.audioPath),
+                                      )
+                                    : const Icon(
+                                        Icons.mic_off_outlined,
+                                        color: Colors.grey,
+                                      ),
+                              ),
+                            );
+                          },
+                        ),
+                  const Divider(height: 32, thickness: 1),
+                  const Text(
+                    "Export Full History",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: _pickStart,
-                  child: const Text("Pick Start"),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                const Text("End: "),
-                Expanded(
-                  child: Text(
-                    _end == null ? "Not set" : _df.format(_end!),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      const Text("Start: "),
+                      Expanded(
+                        child: Text(
+                          _start == null ? "Not set" : _df.format(_start!),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: _pickStart,
+                        child: const Text("Pick Start"),
+                      ),
+                    ],
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: _pickEnd,
-                  child: const Text("Pick End"),
-                ),
-              ],
-            ),
-            const SizedBox(height: 30),
-            Center(
-              child: ElevatedButton.icon(
-                onPressed:
-                (_start != null && _end != null) ? _exportPDF : null,
-                icon: const Icon(Icons.picture_as_pdf),
-                label: const Text("Export PDF to Downloads"),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      const Text("End: "),
+                      Expanded(
+                        child: Text(
+                          _end == null ? "Not set" : _df.format(_end!),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: _pickEnd,
+                        child: const Text("Pick End"),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  Center(
+                    child: ElevatedButton.icon(
+                      onPressed: (_start != null && _end != null)
+                          ? _exportPDF
+                          : null,
+                      icon: const Icon(Icons.picture_as_pdf),
+                      label: const Text("Export PDF to Downloads"),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -241,28 +266,50 @@ class _StudentProgressScreenState extends State<StudentProgressScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Overall Performance", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        const Text(
+          "Overall Performance",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         Wrap(
           spacing: 8,
           runSpacing: 8,
           alignment: WrapAlignment.center,
           children: [
-            _buildStatCard('Avg. Accuracy', '${analytics.averageAccuracy.toStringAsFixed(1)}%', Colors.blue),
-            _buildStatCard('Avg. Fluency', '${analytics.averageFluency.toStringAsFixed(1)}', Colors.green),
-            _buildStatCard('Avg. Completeness', '${analytics.averageCompleteness.toStringAsFixed(1)}%', Colors.orange),
+            _buildStatCard(
+              'Avg. Accuracy',
+              '${analytics.averageAccuracy.toStringAsFixed(1)}%',
+              Colors.blue,
+            ),
+            _buildStatCard(
+              'Avg. Fluency',
+              '${analytics.averageFluency.toStringAsFixed(1)}',
+              Colors.green,
+            ),
+            _buildStatCard(
+              'Avg. Completeness',
+              '${analytics.averageCompleteness.toStringAsFixed(1)}%',
+              Colors.orange,
+            ),
           ],
         ),
         const SizedBox(height: 16),
-        const Text("Current List Progress", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        const Text(
+          "Current List Progress",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 8),
         LinearProgressIndicator(
-          value: analytics.totalWords > 0 ? analytics.masteredWords / analytics.totalWords : 0,
+          value: analytics.totalWords > 0
+              ? analytics.masteredWords / analytics.totalWords
+              : 0,
           minHeight: 12,
           borderRadius: BorderRadius.circular(6),
         ),
         const SizedBox(height: 4),
-        Text('${analytics.masteredWords} of ${analytics.totalWords} words mastered'),
+        Text(
+          '${analytics.masteredWords} of ${analytics.totalWords} words mastered',
+        ),
       ],
     );
   }

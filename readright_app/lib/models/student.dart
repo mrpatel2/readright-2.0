@@ -8,10 +8,10 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Student {
-  final String id;       // Firestore document id or local id
+  final String id; // Firestore document id or local id
   final String name;
-  final String avatar;   // e.g. "tiger", "fox", etc.
-  final String pin;      // optional numeric pin, stored as string ("" = no PIN)
+  final String avatar; // e.g. "tiger", "fox", etc.
+  final String pin; // optional numeric pin, stored as string ("" = no PIN)
   final bool isAudioRecordingEnabled;
 
   Student({
@@ -35,7 +35,8 @@ class Student {
       name: (data['name'] ?? '') as String,
       avatar: (data['avatar'] ?? 'tiger') as String,
       pin: safePin,
-      isAudioRecordingEnabled: (data['isAudioRecordingEnabled'] ?? false) as bool,
+      isAudioRecordingEnabled:
+          (data['isAudioRecordingEnabled'] ?? false) as bool,
     );
   }
 
@@ -57,7 +58,8 @@ class Student {
       name: json['name'] as String? ?? '',
       avatar: json['avatar'] as String? ?? 'tiger',
       pin: safePin,
-      isAudioRecordingEnabled: json['isAudioRecordingEnabled'] as bool? ?? false,
+      isAudioRecordingEnabled:
+          json['isAudioRecordingEnabled'] as bool? ?? false,
     );
   }
 
@@ -89,7 +91,8 @@ class Student {
       name: name ?? this.name,
       avatar: avatar ?? this.avatar,
       pin: pin ?? this.pin,
-      isAudioRecordingEnabled: isAudioRecordingEnabled ?? this.isAudioRecordingEnabled,
+      isAudioRecordingEnabled:
+          isAudioRecordingEnabled ?? this.isAudioRecordingEnabled,
     );
   }
 }

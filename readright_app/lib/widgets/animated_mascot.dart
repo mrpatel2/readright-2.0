@@ -11,7 +11,8 @@ class AnimatedMascot extends StatefulWidget {
   State<AnimatedMascot> createState() => _AnimatedMascotState();
 }
 
-class _AnimatedMascotState extends State<AnimatedMascot> with SingleTickerProviderStateMixin {
+class _AnimatedMascotState extends State<AnimatedMascot>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _ctl;
   late final Animation<double> _bob;
   late final Animation<double> _wave;
@@ -19,9 +20,18 @@ class _AnimatedMascotState extends State<AnimatedMascot> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
-    _ctl = AnimationController(vsync: this, duration: const Duration(seconds: 3))..repeat();
-    _bob = Tween<double>(begin: -4.0, end: 4.0).animate(CurvedAnimation(parent: _ctl, curve: Curves.easeInOut));
-    _wave = Tween<double>(begin: -0.06, end: 0.06).animate(CurvedAnimation(parent: _ctl, curve: Curves.easeInOut));
+    _ctl = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 3),
+    )..repeat();
+    _bob = Tween<double>(
+      begin: -4.0,
+      end: 4.0,
+    ).animate(CurvedAnimation(parent: _ctl, curve: Curves.easeInOut));
+    _wave = Tween<double>(
+      begin: -0.06,
+      end: 0.06,
+    ).animate(CurvedAnimation(parent: _ctl, curve: Curves.easeInOut));
   }
 
   @override
@@ -46,4 +56,3 @@ class _AnimatedMascotState extends State<AnimatedMascot> with SingleTickerProvid
     );
   }
 }
-

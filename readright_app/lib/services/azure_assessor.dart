@@ -14,19 +14,19 @@ import '../models/assessment_result.dart';
 import 'pronunciation_assessor.dart';
 
 class AzureAssessor implements PronunciationAssessor {
-  final String _region = dotenv.env['AZURE_SPEECH_REGION']
-      ?? dotenv.env['AZURE_REGION']
-      ?? 'eastus';
+  final String _region =
+      dotenv.env['AZURE_SPEECH_REGION'] ??
+      dotenv.env['AZURE_REGION'] ??
+      'eastus';
 
-  final String _key = dotenv.env['AZURE_SPEECH_KEY']
-      ?? dotenv.env['AZURE_KEY']
-      ?? '';
+  final String _key =
+      dotenv.env['AZURE_SPEECH_KEY'] ?? dotenv.env['AZURE_KEY'] ?? '';
 
   Uri _buildUrl(String locale) {
     return Uri.parse(
       'https://$_region.stt.speech.microsoft.com/'
-          'speech/recognition/conversation/cognitiveservices/v1'
-          '?language=$locale&format=detailed',
+      'speech/recognition/conversation/cognitiveservices/v1'
+      '?language=$locale&format=detailed',
     );
   }
 
@@ -123,10 +123,10 @@ class AzureAssessor implements PronunciationAssessor {
     // ------------------------------------------------------------------
     final nbest = nbestList.first;
 
-    final rawAccuracy     = _num(nbest['AccuracyScore']);       // 0–100
-    final rawFluency      = _num(nbest['FluencyScore']);        // 0–100
-    final rawCompleteness = _num(nbest['CompletenessScore']);   // 0–100
-    final pronScore       = _num(nbest['PronScore']);           // 0–100 (unused but available)
+    final rawAccuracy = _num(nbest['AccuracyScore']); // 0–100
+    final rawFluency = _num(nbest['FluencyScore']); // 0–100
+    final rawCompleteness = _num(nbest['CompletenessScore']); // 0–100
+    final pronScore = _num(nbest['PronScore']); // 0–100 (unused but available)
 
     // Per-word scoring
     final perWordAccuracy = <String, double>{};
@@ -141,8 +141,8 @@ class AzureAssessor implements PronunciationAssessor {
     }
 
     // Azure recognized text (what it thinks was said)
-    final recognized =
-    (data['DisplayText'] ?? nbest['Display'] ?? "").toString();
+    final recognized = (data['DisplayText'] ?? nbest['Display'] ?? "")
+        .toString();
 
     // ------------------------------------------------------------------
     // 3) Blend Azure’s accuracy with a string-similarity score so
@@ -152,12 +152,10 @@ class AzureAssessor implements PronunciationAssessor {
     // Weighted blend:
     //  - 70% Azure’s PA accuracy
     //  - up to +30 points from string similarity
-    final blendedAccuracy = _clampScore(
-      0.7 * rawAccuracy + 30.0 * sim,
-    );
+    final blendedAccuracy = _clampScore(0.7 * rawAccuracy + 30.0 * sim);
 
     // For fluency/completeness we keep Azure’s values, but clamped
-    final finalFluency      = _clampScore(rawFluency);
+    final finalFluency = _clampScore(rawFluency);
     final finalCompleteness = _clampScore(rawCompleteness);
 
     return AssessmentResult(
@@ -217,8 +215,8 @@ class AzureAssessor implements PronunciationAssessor {
         final cost = s[i - 1] == t[j - 1] ? 0 : 1;
 
         dp[i][j] = [
-          dp[i - 1][j] + 1,        // deletion
-          dp[i][j - 1] + 1,        // insertion
+          dp[i - 1][j] + 1, // deletion
+          dp[i][j - 1] + 1, // insertion
           dp[i - 1][j - 1] + cost, // substitution
         ].reduce((a, b) => a < b ? a : b);
       }

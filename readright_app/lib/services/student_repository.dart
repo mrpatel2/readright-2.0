@@ -169,13 +169,15 @@ class StudentRepository {
 
     // If the student wasn't in cache (edge case), add it
     if (!found) {
-      updated.add(Student(
-        id: studentId,
-        name: name,
-        avatar: avatar,
-        pin: safePin,
-        isAudioRecordingEnabled: isAudioRecordingEnabled,
-      ));
+      updated.add(
+        Student(
+          id: studentId,
+          name: name,
+          avatar: avatar,
+          pin: safePin,
+          isAudioRecordingEnabled: isAudioRecordingEnabled,
+        ),
+      );
     }
 
     updated.sort((a, b) => a.name.compareTo(b.name));
@@ -201,7 +203,6 @@ class StudentRepository {
     final updated = existing.where((s) => s.id != studentId).toList();
     await _saveCache(classId, updated);
   }
-
 
   /// Bulk import (students have no PIN by default)
   Future<List<Student>> importStudents({

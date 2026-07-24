@@ -21,9 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final auth = AuthService();
   await auth.init();
@@ -34,7 +32,9 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthService>.value(value: auth),
-        ChangeNotifierProvider<AccessibilityService>.value(value: accessibility),
+        ChangeNotifierProvider<AccessibilityService>.value(
+          value: accessibility,
+        ),
       ],
       child: const ReadRightApp(),
     ),
@@ -113,11 +113,11 @@ class ReadRightApp extends StatelessWidget {
   // THEMING WRAPPER
   // --------------------------------------------------
   Widget _buildThemedApp(
-      BuildContext context,
-      AccessibilityService accessibility,
-      AuthService auth,
-      Widget home,
-      ) {
+    BuildContext context,
+    AccessibilityService accessibility,
+    AuthService auth,
+    Widget home,
+  ) {
     // -------------------------
     // STUDENT THEME
     // -------------------------
@@ -129,28 +129,37 @@ class ReadRightApp extends StatelessWidget {
         brightness: Brightness.light,
       ),
       useMaterial3: true,
-      textTheme:
-      GoogleFonts.quicksandTextTheme(ThemeData.light().textTheme).copyWith(
-        displayLarge: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-        displayMedium:
-        const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-        headlineMedium:
-        const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        bodyLarge: const TextStyle(fontSize: 20),
-        bodyMedium: const TextStyle(fontSize: 18),
-        labelLarge:
-        const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-      ),
+      textTheme: GoogleFonts.quicksandTextTheme(ThemeData.light().textTheme)
+          .copyWith(
+            displayLarge: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+            ),
+            displayMedium: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
+            headlineMedium: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+            bodyLarge: const TextStyle(fontSize: 20),
+            bodyMedium: const TextStyle(fontSize: 18),
+            labelLarge: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
       scaffoldBackgroundColor: Colors.orange.shade50,
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.orange.shade600,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 18),
-          textStyle:
-          const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           elevation: 6,
         ),
       ),
@@ -176,13 +185,17 @@ class ReadRightApp extends StatelessWidget {
         secondary: Colors.blue.shade600,
       ),
       useMaterial3: true,
-      textTheme:
-      GoogleFonts.interTextTheme(ThemeData.light().textTheme).copyWith(
-        displayLarge:
-        const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-        headlineMedium:
-        const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-      ),
+      textTheme: GoogleFonts.interTextTheme(ThemeData.light().textTheme)
+          .copyWith(
+            displayLarge: const TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
+            headlineMedium: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.indigo.shade700,
         foregroundColor: Colors.white,

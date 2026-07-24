@@ -1,4 +1,3 @@
-
 // lib/services/cloud_assessment_service.dart
 
 import 'package:flutter/foundation.dart';
@@ -7,8 +6,9 @@ import '../models/assessment_result.dart';
 import 'azure_assessor.dart';
 import 'cloud_fallback_assessor.dart';
 
-class CloudAssessmentService extends ChangeNotifier{
-  static final CloudAssessmentService instance = CloudAssessmentService._internal();
+class CloudAssessmentService extends ChangeNotifier {
+  static final CloudAssessmentService instance =
+      CloudAssessmentService._internal();
   factory CloudAssessmentService() => instance;
   CloudAssessmentService._internal();
 

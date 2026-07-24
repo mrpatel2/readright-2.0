@@ -12,7 +12,8 @@ class AccessibilityButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final acc = context.watch<AccessibilityService>();
     final theme = Theme.of(context);
-    final TextStyle itemTextStyle = theme.textTheme.bodyLarge ?? const TextStyle(fontSize: 16);
+    final TextStyle itemTextStyle =
+        theme.textTheme.bodyLarge ?? const TextStyle(fontSize: 16);
     final Color iconReadableColor = theme.colorScheme.onSurface;
 
     // For students we keep the larger icon and a compact popup (existing behavior)
@@ -24,8 +25,7 @@ class AccessibilityButton extends StatelessWidget {
           size: 32,
           color: Colors.orange.shade700,
         ),
-        onSelected: (value) {
-        },
+        onSelected: (value) {},
         itemBuilder: (ctx) => [
           // Student menu: text size controls only
           PopupMenuItem(
@@ -55,7 +55,10 @@ class AccessibilityButton extends StatelessWidget {
               children: [
                 const Icon(Icons.refresh, size: 20),
                 const SizedBox(width: 12),
-                Text('Reset (' + acc.textScale.toStringAsFixed(1) + 'x)', style: itemTextStyle),
+                Text(
+                  'Reset (' + acc.textScale.toStringAsFixed(1) + 'x)',
+                  style: itemTextStyle,
+                ),
               ],
             ),
           ),
@@ -66,11 +69,7 @@ class AccessibilityButton extends StatelessWidget {
     // Teacher mode: keep a dropdown menu. High-contrast option removed (UI only per request).
     return PopupMenuButton<int>(
       tooltip: 'Accessibility Options',
-      icon: Icon(
-        Icons.accessibility_new,
-        size: 24,
-        color: iconReadableColor,
-      ),
+      icon: Icon(Icons.accessibility_new, size: 24, color: iconReadableColor),
       // Color-blind mode gives a gentle background to the popup; otherwise default
       color: acc.colorBlind ? Colors.blue.shade50 : null,
       onSelected: (value) {
@@ -86,7 +85,10 @@ class AccessibilityButton extends StatelessWidget {
             children: [
               Icon(Icons.color_lens, size: 20, color: iconReadableColor),
               const SizedBox(width: 12),
-              Text('Color-blind Mode', style: itemTextStyle.copyWith(color: iconReadableColor)),
+              Text(
+                'Color-blind Mode',
+                style: itemTextStyle.copyWith(color: iconReadableColor),
+              ),
             ],
           ),
         ),
@@ -97,7 +99,10 @@ class AccessibilityButton extends StatelessWidget {
             children: [
               Icon(Icons.text_increase, size: 20, color: iconReadableColor),
               const SizedBox(width: 12),
-              Text('Increase Text Size', style: itemTextStyle.copyWith(color: iconReadableColor)),
+              Text(
+                'Increase Text Size',
+                style: itemTextStyle.copyWith(color: iconReadableColor),
+              ),
             ],
           ),
         ),
@@ -107,7 +112,10 @@ class AccessibilityButton extends StatelessWidget {
             children: [
               Icon(Icons.text_decrease, size: 20, color: iconReadableColor),
               const SizedBox(width: 12),
-              Text('Decrease Text Size', style: itemTextStyle.copyWith(color: iconReadableColor)),
+              Text(
+                'Decrease Text Size',
+                style: itemTextStyle.copyWith(color: iconReadableColor),
+              ),
             ],
           ),
         ),
@@ -118,7 +126,10 @@ class AccessibilityButton extends StatelessWidget {
             children: [
               Icon(Icons.refresh, size: 20, color: iconReadableColor),
               const SizedBox(width: 12),
-              Text('Reset (${acc.textScale.toStringAsFixed(1)}x)', style: itemTextStyle.copyWith(color: iconReadableColor)),
+              Text(
+                'Reset (${acc.textScale.toStringAsFixed(1)}x)',
+                style: itemTextStyle.copyWith(color: iconReadableColor),
+              ),
             ],
           ),
         ),

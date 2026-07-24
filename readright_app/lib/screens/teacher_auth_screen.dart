@@ -26,7 +26,9 @@ class _TeacherAuthScreenState extends State<TeacherAuthScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.isSignup ? "Create Teacher Account" : "Teacher Login"),
+        title: Text(
+          widget.isSignup ? "Create Teacher Account" : "Teacher Login",
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
@@ -66,38 +68,39 @@ class _TeacherAuthScreenState extends State<TeacherAuthScreen> {
                 onPressed: _loading
                     ? null
                     : () async {
-                  setState(() => _loading = true);
+                        setState(() => _loading = true);
 
-                  try {
-                    if (widget.isSignup) {
-                      await auth.signup(
-                        email: _email.text.trim(),
-                        password: _password.text.trim(),
-                        role: UserRole.teacher,
-                      );
-                    } else {
-                      await auth.login(
-                        email: _email.text.trim(),
-                        password: _password.text.trim(),
-                        role: UserRole.teacher,
-                      );
-                    }
+                        try {
+                          if (widget.isSignup) {
+                            await auth.signup(
+                              email: _email.text.trim(),
+                              password: _password.text.trim(),
+                              role: UserRole.teacher,
+                            );
+                          } else {
+                            await auth.login(
+                              email: _email.text.trim(),
+                              password: _password.text.trim(),
+                              role: UserRole.teacher,
+                            );
+                          }
 
-                    if (!mounted) return;
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const TeacherDashboardScreen()),
-                          (_) => false,
-                    );
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Error: $e")),
-                    );
-                  } finally {
-                    if (mounted) setState(() => _loading = false);
-                  }
-                },
+                          if (!mounted) return;
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const TeacherDashboardScreen(),
+                            ),
+                            (_) => false,
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(
+                            context,
+                          ).showSnackBar(SnackBar(content: Text("Error: $e")));
+                        } finally {
+                          if (mounted) setState(() => _loading = false);
+                        }
+                      },
                 child: Text(
                   widget.isSignup ? "Create Account" : "Login",
                   style: const TextStyle(fontSize: 20),

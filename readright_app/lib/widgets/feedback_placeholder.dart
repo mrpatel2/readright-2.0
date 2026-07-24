@@ -60,15 +60,19 @@ class _FeedbackPlaceholderState extends State<FeedbackPlaceholder> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Center(
-            child: Text('Feedback for "${widget.word}"',
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+            child: Text(
+              'Feedback for "${widget.word}"',
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(height: 16),
 
           // Recognized and score row
           Card(
             elevation: 2,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -80,10 +84,23 @@ class _FeedbackPlaceholderState extends State<FeedbackPlaceholder> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Recognized', style: TextStyle(fontSize: 14, color: Colors.black54)),
+                            const Text(
+                              'Recognized',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black54,
+                              ),
+                            ),
                             const SizedBox(height: 6),
-                            Text(widget.recognized.isEmpty ? '—' : widget.recognized,
-                                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
+                            Text(
+                              widget.recognized.isEmpty
+                                  ? '—'
+                                  : widget.recognized,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -100,9 +117,22 @@ class _FeedbackPlaceholderState extends State<FeedbackPlaceholder> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text('${scorePct.toStringAsFixed(0)}%', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: primary)),
+                              Text(
+                                '${scorePct.toStringAsFixed(0)}%',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: primary,
+                                ),
+                              ),
                               const SizedBox(height: 2),
-                              const Text('Score', style: TextStyle(fontSize: 12, color: Colors.black54)),
+                              const Text(
+                                'Score',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black54,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -121,16 +151,18 @@ class _FeedbackPlaceholderState extends State<FeedbackPlaceholder> {
                         icon: Icon(_isPlaying ? Icons.stop : Icons.play_arrow),
                         label: Text(_isPlaying ? 'Stop Audio' : 'Play Audio'),
                         style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
                       ),
 
                       TextButton(
                         onPressed: () => Navigator.pop(context),
                         child: const Text('Back to Practice'),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -140,9 +172,19 @@ class _FeedbackPlaceholderState extends State<FeedbackPlaceholder> {
 
           // Additional teacher-friendly details or placeholders
           if (widget.score < 60) ...[
-            Text('Tips:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: primary)),
+            Text(
+              'Tips:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: primary,
+              ),
+            ),
             const SizedBox(height: 6),
-            const Text('Try breaking the word into sounds, and speak slowly and clearly.', style: TextStyle(fontSize: 14)),
+            const Text(
+              'Try breaking the word into sounds, and speak slowly and clearly.',
+              style: TextStyle(fontSize: 14),
+            ),
           ],
         ],
       ),

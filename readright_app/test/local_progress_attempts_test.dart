@@ -24,7 +24,7 @@ void main() {
       recognizedText: 'cat',
       timestamp: DateTime.now(),
       correct: true,
-      listName: "dolch_nouns"
+      listName: "dolch_nouns",
     );
 
     await service.saveAttempt(attempt);

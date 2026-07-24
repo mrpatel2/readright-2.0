@@ -47,14 +47,9 @@ class _ManageWordListScreenState extends State<ManageWordListScreen> {
 
   Future<void> _uploadWordList() async {
     // Accept CSV files only
-    final typeGroup = XTypeGroup(
-      label: 'CSV',
-      extensions: ['csv'],
-    );
+    final typeGroup = XTypeGroup(label: 'CSV', extensions: ['csv']);
 
-    final XFile? picked = await openFile(
-      acceptedTypeGroups: [typeGroup],
-    );
+    final XFile? picked = await openFile(acceptedTypeGroups: [typeGroup]);
 
     if (picked == null) return; // User cancelled
 
@@ -76,25 +71,22 @@ class _ManageWordListScreenState extends State<ManageWordListScreen> {
     await _loadUploadedLists();
 
     if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Uploaded: $fileName')),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text('Uploaded: $fileName')));
   }
 
   void _openList(
-      BuildContext context,
-      String name,
-      String path, {
-        required bool isAsset,
-      }) {
+    BuildContext context,
+    String name,
+    String path, {
+    required bool isAsset,
+  }) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => WordListScreen(
-          name: name,
-          path: path,
-          isAsset: isAsset,
-        ),
+        builder: (_) =>
+            WordListScreen(name: name, path: path, isAsset: isAsset),
       ),
     );
   }
@@ -102,9 +94,7 @@ class _ManageWordListScreenState extends State<ManageWordListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Manage Word Lists'),
-      ),
+      appBar: AppBar(title: const Text('Manage Word Lists')),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -116,7 +106,7 @@ class _ManageWordListScreenState extends State<ManageWordListScreen> {
 
           // Built-in lists from assets
           ...builtInWordLists.map(
-                (list) => Card(
+            (list) => Card(
               margin: const EdgeInsets.only(bottom: 12),
               child: ListTile(
                 title: Text(list.name),
@@ -146,24 +136,18 @@ class _ManageWordListScreenState extends State<ManageWordListScreen> {
             ),
 
           // Uploaded CSV files
-          ...uploadedLists.map(
-                (file) {
-              final fileName = file.path.split(Platform.pathSeparator).last;
-              return Card(
-                margin: const EdgeInsets.only(bottom: 12),
-                child: ListTile(
-                  title: Text(fileName),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => _openList(
-                    context,
-                    fileName,
-                    file.path,
-                    isAsset: false,
-                  ),
-                ),
-              );
-            },
-          ),
+          ...uploadedLists.map((file) {
+            final fileName = file.path.split(Platform.pathSeparator).last;
+            return Card(
+              margin: const EdgeInsets.only(bottom: 12),
+              child: ListTile(
+                title: Text(fileName),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () =>
+                    _openList(context, fileName, file.path, isAsset: false),
+              ),
+            );
+          }),
         ],
       ),
       floatingActionButton: FloatingActionButton(

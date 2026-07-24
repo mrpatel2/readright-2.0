@@ -18,11 +18,11 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  testWidgets('PracticeScreen shows loading mascot', (WidgetTester tester) async {
+  testWidgets('PracticeScreen shows loading mascot', (
+    WidgetTester tester,
+  ) async {
     await tester.pumpWidget(
-      const MaterialApp(
-        home: PracticeScreen(studentId: '1',),
-      ),
+      const MaterialApp(home: PracticeScreen(studentId: '1')),
     );
 
     // Let the first frame build

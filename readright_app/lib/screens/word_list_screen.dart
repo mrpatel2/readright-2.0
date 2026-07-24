@@ -79,75 +79,70 @@ class _WordListScreenState extends State<WordListScreen> {
       setState(() {
         _loading = false;
       });
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error loading list: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error loading list: $e')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.name),
-      ),
+      appBar: AppBar(title: Text(widget.name)),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : _items.isEmpty
           ? const Center(child: Text('No words found in this list.'))
           : ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: _items.length,
-        itemBuilder: (context, index) {
-          final w = _items[index];
-
-          return Card(
-            margin: const EdgeInsets.only(bottom: 12),
-            child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          w.word,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+              itemCount: _items.length,
+              itemBuilder: (context, index) {
+                final w = _items[index];
+
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                w.word,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            if (w.mastered)
+                              const Icon(Icons.check_circle, size: 20),
+                          ],
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          w.exampleSentence,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                        if (w.category.isNotEmpty) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            w.category,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                      ),
-                      if (w.mastered)
-                        const Icon(
-                          Icons.check_circle,
-                          size: 20,
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    w.exampleSentence,
-                    style: const TextStyle(fontSize: 16),
-                  ),
-                  if (w.category.isNotEmpty) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      w.category,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
+                        ],
+                      ],
                     ),
-                  ],
-                ],
-              ),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }

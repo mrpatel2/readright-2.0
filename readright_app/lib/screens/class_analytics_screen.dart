@@ -34,9 +34,7 @@ class _ClassAnalyticsScreenState extends State<ClassAnalyticsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('${widget.className} Analytics'),
-      ),
+      appBar: AppBar(title: Text('${widget.className} Analytics')),
       body: FutureBuilder<ClassAnalytics>(
         future: _analyticsFuture,
         builder: (context, snapshot) {
@@ -49,7 +47,8 @@ class _ClassAnalyticsScreenState extends State<ClassAnalyticsScreen> {
 
           final analytics = snapshot.data!;
 
-          if (analytics.problemWords.isEmpty && analytics.averageAccuracy == 0) {
+          if (analytics.problemWords.isEmpty &&
+              analytics.averageAccuracy == 0) {
             return const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +59,7 @@ class _ClassAnalyticsScreenState extends State<ClassAnalyticsScreen> {
                     'No student data yet!',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                   SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text('Practice some words to see analytics here.'),
                 ],
               ),
@@ -106,7 +105,9 @@ class _ClassAnalyticsScreenState extends State<ClassAnalyticsScreen> {
                 ),
                 const SizedBox(height: 16),
                 if (analytics.problemWords.isEmpty)
-                  const Text('No incorrect words have been recorded yet. Great job!')
+                  const Text(
+                    'No incorrect words have been recorded yet. Great job!',
+                  )
                 else
                   ListView.builder(
                     shrinkWrap: true,
@@ -116,10 +117,11 @@ class _ClassAnalyticsScreenState extends State<ClassAnalyticsScreen> {
                       final problem = analytics.problemWords[index];
                       return Card(
                         child: ListTile(
-                          leading: CircleAvatar(
-                            child: Text('${index + 1}'),
+                          leading: CircleAvatar(child: Text('${index + 1}')),
+                          title: Text(
+                            problem.word,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          title: Text(problem.word, style: const TextStyle(fontWeight: FontWeight.bold)),
                           trailing: Text('${problem.incorrectCount} misses'),
                         ),
                       );

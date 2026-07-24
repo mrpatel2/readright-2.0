@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ChartsPlaceholder extends StatelessWidget {
   const ChartsPlaceholder({super.key});
 
@@ -13,10 +12,16 @@ class ChartsPlaceholder extends StatelessWidget {
           children: [
             Container(
               height: 120 * value,
-              decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(6)),
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(6),
+              ),
             ),
             const SizedBox(height: 6),
-            const Text('Wk', style: TextStyle(fontSize: 12, color: Colors.black54)),
+            const Text(
+              'Wk',
+              style: TextStyle(fontSize: 12, color: Colors.black54),
+            ),
           ],
         ),
       ),
@@ -35,7 +40,14 @@ class ChartsPlaceholder extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Progress', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: primary)),
+              Text(
+                'Progress',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: primary,
+                ),
+              ),
               Text('Last 5 weeks', style: TextStyle(color: Colors.grey[600])),
             ],
           ),
@@ -44,12 +56,17 @@ class ChartsPlaceholder extends StatelessWidget {
           // Mock bar chart
           Card(
             elevation: 2,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
-                  const Text('Weekly Accuracy', style: TextStyle(fontWeight: FontWeight.w600)),
+                  const Text(
+                    'Weekly Accuracy',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
                   const SizedBox(height: 12),
                   SizedBox(
                     height: 160,
@@ -74,18 +91,26 @@ class ChartsPlaceholder extends StatelessWidget {
           // Mock line summary
           Card(
             elevation: 2,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Score Over Time', style: TextStyle(fontWeight: FontWeight.w600)),
+                  const Text(
+                    'Score Over Time',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
                   const SizedBox(height: 10),
                   SizedBox(
                     height: 120,
                     child: Center(
-                      child: Text('Line chart placeholder (static area)', style: TextStyle(color: Colors.grey[700])),
+                      child: Text(
+                        'Line chart placeholder (static area)',
+                        style: TextStyle(color: Colors.grey[700]),
+                      ),
                     ),
                   ),
                 ],

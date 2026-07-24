@@ -32,7 +32,7 @@ class TeacherDashboardScreen extends StatelessWidget {
               if (!context.mounted) return;
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (_) => const LoginScreen()),
-                    (_) => false,
+                (_) => false,
               );
             },
           ),
@@ -43,10 +43,7 @@ class TeacherDashboardScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Colors.indigo.shade50,
-              Colors.white,
-            ],
+            colors: [Colors.indigo.shade50, Colors.white],
           ),
         ),
         child: SafeArea(
@@ -82,23 +79,33 @@ class TeacherDashboardScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.school, color: Theme.of(context).colorScheme.onPrimary, size: 32),
+                            Icon(
+                              Icons.school,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                              size: 32,
+                            ),
                             const SizedBox(width: 12),
                             Text(
                               'ReadRight',
-                              style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context).textTheme.displayLarge
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 12),
                         Text(
                           'Welcome back! Manage your students and word lists.',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.85),
-                          ),
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimary.withOpacity(0.85),
+                              ),
                         ),
                       ],
                     ),
@@ -153,7 +160,7 @@ class TeacherDashboardScreen extends StatelessWidget {
                           teacherId: teacherId,
                           classId: "default_class",
                         ),
-                      )
+                      ),
                     );
                   },
                 ),
@@ -171,7 +178,8 @@ class TeacherDashboardScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => const ManageWordListScreen()),
+                        builder: (_) => const ManageWordListScreen(),
+                      ),
                     );
                   },
                 ),
@@ -206,7 +214,8 @@ class TeacherDashboardScreen extends StatelessWidget {
                   context: context,
                   icon: Icons.auto_stories,
                   title: 'AI Story Builder',
-                  description: 'Generate a leveled, interest-driven Dolch story for a student',
+                  description:
+                      'Generate a leveled, interest-driven Dolch story for a student',
                   color: Colors.teal,
                   onTap: () {
                     Navigator.push(
@@ -236,18 +245,24 @@ class TeacherDashboardScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.info_outline, color: Theme.of(context).colorScheme.primary),
+                            Icon(
+                              Icons.info_outline,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                             const SizedBox(width: 8),
                             Text(
                               'About ReadRight',
-                              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                              style: Theme.of(context).textTheme.titleLarge
+                                  ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
                         const SizedBox(height: 12),
                         Text(
                           'ReadRight helps students practice reading words aloud with real-time feedback and pronunciation assessment.',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(height: 1.5),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(height: 1.5),
                         ),
                       ],
                     ),
@@ -276,9 +291,7 @@ class TeacherDashboardScreen extends StatelessWidget {
 
     return Card(
       elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
@@ -301,18 +314,27 @@ class TeacherDashboardScreen extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       description,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.onSurface.withOpacity(0.7),
+                      ),
                     ),
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios,
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), size: 20),
+              Icon(
+                Icons.arrow_forward_ios,
+                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                size: 20,
+              ),
             ],
           ),
         ),

@@ -23,10 +23,26 @@ class DolchLevel {
 
 const List<DolchLevel> dolchLevels = [
   DolchLevel(key: 'prek', label: 'Pre-K', assetPath: 'lib/data/dolch_prek.csv'),
-  DolchLevel(key: 'kindergarten', label: 'Kindergarten', assetPath: 'lib/data/dolch_kindergarten.csv'),
-  DolchLevel(key: '1st', label: '1st Grade', assetPath: 'lib/data/dolch_1st.csv'),
-  DolchLevel(key: '2nd', label: '2nd Grade', assetPath: 'lib/data/dolch_2nd.csv'),
-  DolchLevel(key: '3rd', label: '3rd Grade', assetPath: 'lib/data/dolch_3rd.csv'),
+  DolchLevel(
+    key: 'kindergarten',
+    label: 'Kindergarten',
+    assetPath: 'lib/data/dolch_kindergarten.csv',
+  ),
+  DolchLevel(
+    key: '1st',
+    label: '1st Grade',
+    assetPath: 'lib/data/dolch_1st.csv',
+  ),
+  DolchLevel(
+    key: '2nd',
+    label: '2nd Grade',
+    assetPath: 'lib/data/dolch_2nd.csv',
+  ),
+  DolchLevel(
+    key: '3rd',
+    label: '3rd Grade',
+    assetPath: 'lib/data/dolch_3rd.csv',
+  ),
 ];
 
 class DolchCatalog {
@@ -41,11 +57,9 @@ class DolchCatalog {
     for (var i = 1; i < lines.length; i++) {
       final parts = lines[i].split(',');
       if (parts.length < 3) continue;
-      words.add(WordItem(
-        category: parts[0],
-        word: parts[1],
-        exampleSentence: parts[2],
-      ));
+      words.add(
+        WordItem(category: parts[0], word: parts[1], exampleSentence: parts[2]),
+      );
     }
     return words;
   }

@@ -93,7 +93,9 @@ class _FillBlankGameScreenState extends State<FillBlankGameScreen> {
     final isCorrect = option.toLowerCase() == round.target.word.toLowerCase();
     setState(() {
       _selectedOption = option;
-      _feedback = isCorrect ? '🌟 Correct!' : 'Not quite — the word was "${round.target.word}"';
+      _feedback = isCorrect
+          ? '🌟 Correct!'
+          : 'Not quite — the word was "${round.target.word}"';
     });
 
     final attempt = AttemptRecord(
@@ -122,7 +124,11 @@ class _FillBlankGameScreenState extends State<FillBlankGameScreen> {
       await _progressService.markWordMastered(round.target.word);
       await _speechService.speak(['Correct!', round.target.word]);
     } else {
-      await _speechService.speak(['Not quite.', 'The word was', round.target.word]);
+      await _speechService.speak([
+        'Not quite.',
+        'The word was',
+        round.target.word,
+      ]);
     }
 
     await Future.delayed(const Duration(milliseconds: 600));
@@ -170,12 +176,17 @@ class _FillBlankGameScreenState extends State<FillBlankGameScreen> {
             Card(
               elevation: 6,
               color: Colors.amber.shade50,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Text(
                   round.sentenceWithBlank,
-                  style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w600,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -183,7 +194,8 @@ class _FillBlankGameScreenState extends State<FillBlankGameScreen> {
             const SizedBox(height: 24),
             ...round.options.map((option) {
               final isSelected = _selectedOption == option;
-              final isTarget = option.toLowerCase() == round.target.word.toLowerCase();
+              final isTarget =
+                  option.toLowerCase() == round.target.word.toLowerCase();
               Color? color;
               if (_selectedOption != null) {
                 if (isTarget) {
@@ -197,7 +209,9 @@ class _FillBlankGameScreenState extends State<FillBlankGameScreen> {
                 child: SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: _selectedOption == null ? () => _choose(option) : null,
+                    onPressed: _selectedOption == null
+                        ? () => _choose(option)
+                        : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: color,
                       padding: const EdgeInsets.symmetric(vertical: 18),
@@ -214,7 +228,9 @@ class _FillBlankGameScreenState extends State<FillBlankGameScreen> {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: _feedback.startsWith('🌟') ? Colors.green.shade800 : Colors.orange.shade800,
+                  color: _feedback.startsWith('🌟')
+                      ? Colors.green.shade800
+                      : Colors.orange.shade800,
                 ),
                 textAlign: TextAlign.center,
               ),

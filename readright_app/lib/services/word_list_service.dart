@@ -8,11 +8,11 @@ class WordListService {
     'lib/data/test1.csv',
     'lib/data/test2.csv',
     'lib/data/dolch_prek.csv',
-//    'lib/data/dolch_kindergarten.csv',
-//    'lib/data/dolch_1st.csv',
-//    'lib/data/dolch_2nd.csv',
-//    'lib/data/dolch_3rd.csv',
-//    'lib/data/dolch_nouns.csv',
+    //    'lib/data/dolch_kindergarten.csv',
+    //    'lib/data/dolch_1st.csv',
+    //    'lib/data/dolch_2nd.csv',
+    //    'lib/data/dolch_3rd.csv',
+    //    'lib/data/dolch_nouns.csv',
   ];
 
   final LocalProgressService storage;
@@ -21,7 +21,7 @@ class WordListService {
 
   Future<List<WordItem>> loadCurrentList() async {
     int index = await storage.getCurrentListIndex();
-    
+
     // If the index is out of bounds, it means the user has completed all lists.
     if (index >= _dolchFiles.length) {
       // Return an empty list to signal completion.
@@ -35,12 +35,14 @@ class WordListService {
     for (var i = 1; i < lines.length; i++) {
       final parts = lines[i].split(',');
       if (parts.length < 3) continue;
-      words.add(WordItem(
-        category: parts[0],
-        word: parts[1],
-        exampleSentence: parts[2],
-        mastered: await storage.isWordMastered(parts[1]),
-      ));
+      words.add(
+        WordItem(
+          category: parts[0],
+          word: parts[1],
+          exampleSentence: parts[2],
+          mastered: await storage.isWordMastered(parts[1]),
+        ),
+      );
     }
     return words;
   }

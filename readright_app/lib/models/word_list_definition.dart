@@ -1,21 +1,15 @@
 // lib/models/word_list_definition.dart
 
 class WordListDefinition {
-  final String name;      // Name shown in UI
+  final String name; // Name shown in UI
   final String assetPath; // Path to CSV file inside assets
 
-  const WordListDefinition({
-    required this.name,
-    required this.assetPath,
-  });
+  const WordListDefinition({required this.name, required this.assetPath});
 }
 
 // Built-in lists shipped with the app
 const List<WordListDefinition> builtInWordLists = [
-  WordListDefinition(
-    name: 'Seed Words',
-    assetPath: 'lib/data/seed_words.csv',
-  ),
+  WordListDefinition(name: 'Seed Words', assetPath: 'lib/data/seed_words.csv'),
   WordListDefinition(
     name: 'Dolch – PreK',
     assetPath: 'lib/data/dolch_prek.csv',
@@ -40,12 +34,6 @@ const List<WordListDefinition> builtInWordLists = [
     name: 'Dolch – Nouns',
     assetPath: 'lib/data/dolch_nouns.csv',
   ),
-  WordListDefinition(
-    name: 'Test List 1',
-    assetPath: 'lib/data/test1.csv',
-  ),
-  WordListDefinition(
-    name: 'Test List 2',
-    assetPath: 'lib/data/test2.csv',
-  ),
+  WordListDefinition(name: 'Test List 1', assetPath: 'lib/data/test1.csv'),
+  WordListDefinition(name: 'Test List 2', assetPath: 'lib/data/test2.csv'),
 ];

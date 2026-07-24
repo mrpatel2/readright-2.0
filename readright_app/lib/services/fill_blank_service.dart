@@ -32,10 +32,11 @@ class FillBlankService {
     WordItem target, {
     int optionCount = 4,
   }) {
-    final distractors = pool
-        .where((w) => w.word.toLowerCase() != target.word.toLowerCase())
-        .toList()
-      ..shuffle(_random);
+    final distractors =
+        pool
+            .where((w) => w.word.toLowerCase() != target.word.toLowerCase())
+            .toList()
+          ..shuffle(_random);
 
     final options = <String>[
       target.word,

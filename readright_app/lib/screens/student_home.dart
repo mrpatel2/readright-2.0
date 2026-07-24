@@ -18,10 +18,7 @@ import 'fill_blank_game_screen.dart';
 class StudentHome extends StatefulWidget {
   final String studentId;
 
-  const StudentHome({
-    super.key,
-    required this.studentId,
-  });
+  const StudentHome({super.key, required this.studentId});
 
   @override
   State<StudentHome> createState() => _StudentHomeState();
@@ -74,17 +71,13 @@ class _StudentHomeState extends State<StudentHome> {
       backgroundColor: Colors.orange.shade50,
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color(0xFFFFCC80),
+        selectedItemColor: Colors.deepOrange,
+        unselectedItemColor: Colors.brown,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mic),
-            label: 'Practice',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.extension),
-            label: 'Game',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.mic), label: 'Practice'),
+          BottomNavigationBarItem(icon: Icon(Icons.extension), label: 'Game'),
           BottomNavigationBarItem(
             icon: Icon(Icons.feedback),
             label: 'Feedback',

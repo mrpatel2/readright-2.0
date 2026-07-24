@@ -39,7 +39,10 @@ class StudentSessionService {
       '$_attemptsKeyPrefix$studentId';
 
   /// Save a student's reading attempt locally, keeping the last 10 within 30 days.
-  static Future<void> saveAttempt(String studentId, AttemptRecord attempt) async {
+  static Future<void> saveAttempt(
+    String studentId,
+    AttemptRecord attempt,
+  ) async {
     final prefs = await SharedPreferences.getInstance();
     final key = _getAttemptsCacheKey(studentId);
 
@@ -49,7 +52,9 @@ class StudentSessionService {
 
     // Filter out attempts older than 30 days
     final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 30));
-    final recent = updated.where((a) => a.timestamp.isAfter(thirtyDaysAgo)).toList();
+    final recent = updated
+        .where((a) => a.timestamp.isAfter(thirtyDaysAgo))
+        .toList();
 
     // Sort by most recent first
     recent.sort((a, b) => b.timestamp.compareTo(a.timestamp));
@@ -63,7 +68,9 @@ class StudentSessionService {
   }
 
   /// Load attempts from local cache for a specific student.
-  static Future<List<AttemptRecord>> getAttemptsForStudent(String studentId) async {
+  static Future<List<AttemptRecord>> getAttemptsForStudent(
+    String studentId,
+  ) async {
     final prefs = await SharedPreferences.getInstance();
     final key = _getAttemptsCacheKey(studentId);
     final raw = prefs.getString(key);

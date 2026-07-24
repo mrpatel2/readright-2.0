@@ -366,11 +366,11 @@ class _ClassManagementScreenState extends State<ClassManagementScreen> {
   // ---------------------------------------------------------------------------
 
   Widget _avatarChip(
-      String value,
-      String emoji,
-      String selected,
-      void Function(String) onSelected,
-      ) {
+    String value,
+    String emoji,
+    String selected,
+    void Function(String) onSelected,
+  ) {
     final bool isSelected = value == selected;
 
     return ChoiceChip(
@@ -387,9 +387,7 @@ class _ClassManagementScreenState extends State<ClassManagementScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Manage ${widget.className}'),
-      ),
+      appBar: AppBar(title: Text('Manage ${widget.className}')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -425,9 +423,7 @@ class _ClassManagementScreenState extends State<ClassManagementScreen> {
                     return const Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.hasError) {
-                    return const Center(
-                      child: Text('Error loading students.'),
-                    );
+                    return const Center(child: Text('Error loading students.'));
                   }
 
                   final students = snapshot.data ?? [];
@@ -442,12 +438,13 @@ class _ClassManagementScreenState extends State<ClassManagementScreen> {
                   }
 
                   return GridView.builder(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 12,
-                      crossAxisSpacing: 12,
-                      childAspectRatio: 0.9,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 12,
+                          crossAxisSpacing: 12,
+                          childAspectRatio: 0.9,
+                        ),
                     itemCount: students.length,
                     itemBuilder: (context, index) {
                       final s = students[index];
@@ -475,16 +472,13 @@ class _ClassManagementScreenState extends State<ClassManagementScreen> {
       elevation: 3,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: () => _showEditStudentDialog(s),  // <-- EDIT ACTION
+        onTap: () => _showEditStudentDialog(s), // <-- EDIT ACTION
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                emoji,
-                style: const TextStyle(fontSize: 36),
-              ),
+              Text(emoji, style: const TextStyle(fontSize: 36)),
               const SizedBox(height: 8),
               Text(
                 s.name,
@@ -498,12 +492,9 @@ class _ClassManagementScreenState extends State<ClassManagementScreen> {
                 const SizedBox(height: 4),
                 Text(
                   'PIN: ${s.pin}',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
                 ),
-              ]
+              ],
             ],
           ),
         ),

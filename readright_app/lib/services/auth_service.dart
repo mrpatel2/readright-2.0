@@ -71,10 +71,7 @@ class AuthService extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
       await _saveRole(role);
       print('✅ Firebase login successful');
     } on FirebaseAuthException catch (e) {

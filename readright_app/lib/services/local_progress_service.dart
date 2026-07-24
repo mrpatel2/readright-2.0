@@ -64,10 +64,7 @@ class LocalProgressService {
 
   Future<void> _saveMasteredSet(Set<String> mastered) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(
-      _keyMasteredWords,
-      jsonEncode(mastered.toList()),
-    );
+    await prefs.setString(_keyMasteredWords, jsonEncode(mastered.toList()));
   }
 
   Future<bool> isWordMastered(String word) async {
@@ -109,7 +106,9 @@ class LocalProgressService {
   // ------------------------------------------------------------
 
   Future<String> exportAttemptsPDFToAndroidDownloads(
-      DateTime start, DateTime end) async {
+    DateTime start,
+    DateTime end,
+  ) async {
     final df = DateFormat('yyyy-MM-dd HH:mm:ss');
     final attempts = await getAllAttempts();
 
@@ -130,38 +129,36 @@ class LocalProgressService {
         build: (context) => [
           pw.Text(
             "ReadRight – Student Progress Report",
-            style: pw.TextStyle(
-              fontSize: 22,
-              fontWeight: pw.FontWeight.bold,
-            ),
+            style: pw.TextStyle(fontSize: 22, fontWeight: pw.FontWeight.bold),
           ),
           pw.SizedBox(height: 8),
           pw.Text("Student ID: $studentId"),
           pw.Text("Date Range: ${df.format(start)} → ${df.format(end)}"),
           pw.SizedBox(height: 20),
 
-          pw.Text("Attempts:",
-              style:
-              pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
+          pw.Text(
+            "Attempts:",
+            style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
+          ),
           pw.SizedBox(height: 8),
 
           pw.Table.fromTextArray(
             headers: ["Word", "List", "Correct", "Timestamp"],
             data: filtered
-                .map((a) => [
-              a.word,
-              a.listName,
-              a.correct ? "Yes" : "No",
-              df.format(a.timestamp)
-            ])
+                .map(
+                  (a) => [
+                    a.word,
+                    a.listName,
+                    a.correct ? "Yes" : "No",
+                    df.format(a.timestamp),
+                  ],
+                )
                 .toList(),
             headerStyle: pw.TextStyle(
               fontWeight: pw.FontWeight.bold,
               color: PdfColors.white,
             ),
-            headerDecoration: const pw.BoxDecoration(
-              color: PdfColors.blue800,
-            ),
+            headerDecoration: const pw.BoxDecoration(color: PdfColors.blue800),
             cellAlignment: pw.Alignment.centerLeft,
             cellStyle: const pw.TextStyle(fontSize: 10),
           ),
@@ -169,8 +166,7 @@ class LocalProgressService {
           pw.SizedBox(height: 25),
           pw.Text(
             "Summary:",
-            style:
-            pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
+            style: pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold),
           ),
 
           pw.SizedBox(height: 8),

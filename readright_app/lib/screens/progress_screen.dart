@@ -90,7 +90,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
     // Calculate stats
     final correctCount = _attempts.where((a) => a.correct).length;
     final totalCount = _attempts.length;
-    final percentage = totalCount > 0 ? (correctCount / totalCount * 100).round() : 0;
+    final percentage = totalCount > 0
+        ? (correctCount / totalCount * 100).round()
+        : 0;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(12),
@@ -121,8 +123,16 @@ class _ProgressScreenState extends State<ProgressScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _buildStatItem('✅ Correct', correctCount.toString(), Colors.green),
-                      _buildStatItem('📝 Total', totalCount.toString(), Colors.blue),
+                      _buildStatItem(
+                        '✅ Correct',
+                        correctCount.toString(),
+                        Colors.green,
+                      ),
+                      _buildStatItem(
+                        '📝 Total',
+                        totalCount.toString(),
+                        Colors.blue,
+                      ),
                       _buildStatItem('⭐ Score', '$percentage%', Colors.amber),
                     ],
                   ),
@@ -145,23 +155,33 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
           // List of attempts - child-friendly
           ...List.generate(_attempts.length, (index) {
-            final attempt = _attempts[_attempts.length - 1 - index]; // Reverse order
+            final attempt =
+                _attempts[_attempts.length - 1 - index]; // Reverse order
             return Card(
               margin: const EdgeInsets.only(bottom: 10),
               elevation: 3,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 leading: Container(
                   width: 40,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: attempt.correct ? Colors.green.shade100 : Colors.red.shade100,
+                    color: attempt.correct
+                        ? Colors.green.shade100
+                        : Colors.red.shade100,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     attempt.correct ? Icons.check_circle : Icons.cancel,
-                    color: attempt.correct ? Colors.green.shade700 : Colors.red.shade700,
+                    color: attempt.correct
+                        ? Colors.green.shade700
+                        : Colors.red.shade700,
                     size: 24,
                   ),
                 ),
@@ -182,10 +202,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 ),
                 trailing: Text(
                   _formatDate(attempt.timestamp),
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
                 ),
               ),
             );
@@ -236,10 +253,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
         const SizedBox(height: 8),
         Text(
           label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
+          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
       ],
     );

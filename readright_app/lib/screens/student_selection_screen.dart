@@ -43,9 +43,7 @@ class _StudentSelectionScreenState extends State<StudentSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     if (loading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -54,74 +52,74 @@ class _StudentSelectionScreenState extends State<StudentSelectionScreen> {
         padding: const EdgeInsets.all(24),
         child: students.isEmpty
             ? const Center(
-          child: Text(
-            "No students found.\nAsk your teacher to add you!",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
-          ),
-        )
-            : GridView.builder(
-          itemCount: students.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 1.2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-          ),
-          itemBuilder: (_, index) {
-            final s = students[index];
-            final emoji = _emojiForAvatar(s.avatar);
-
-            return InkWell(
-              onTap: () async {
-                // -----------------------------------------------------
-                // NEW — PIN CHECK
-                // -----------------------------------------------------
-                if (s.pin.isNotEmpty) {
-                  final ok = await _showPinDialog(context, s);
-                  if (!ok) return; // wrong PIN → exit
-                }
-
-                // Save selected student
-                await StudentSessionService.saveStudent(s);
-
-                if (!mounted) return;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => StudentHome(studentId: s.id),
-                  ),
-                );
-              },
-              borderRadius: BorderRadius.circular(16),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.indigo.shade50,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: Colors.indigo.shade200,
-                    width: 2,
-                  ),
+                child: Text(
+                  "No students found.\nAsk your teacher to add you!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20),
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(emoji, style: const TextStyle(fontSize: 40)),
-                    const SizedBox(height: 8),
-                    Text(
-                      s.name,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+              )
+            : GridView.builder(
+                itemCount: students.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                ),
+                itemBuilder: (_, index) {
+                  final s = students[index];
+                  final emoji = _emojiForAvatar(s.avatar);
+
+                  return InkWell(
+                    onTap: () async {
+                      // -----------------------------------------------------
+                      // NEW — PIN CHECK
+                      // -----------------------------------------------------
+                      if (s.pin.isNotEmpty) {
+                        final ok = await _showPinDialog(context, s);
+                        if (!ok) return; // wrong PIN → exit
+                      }
+
+                      // Save selected student
+                      await StudentSessionService.saveStudent(s);
+
+                      if (!mounted) return;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => StudentHome(studentId: s.id),
+                        ),
+                      );
+                    },
+                    borderRadius: BorderRadius.circular(16),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.indigo.shade50,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Colors.indigo.shade200,
+                          width: 2,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(emoji, style: const TextStyle(fontSize: 40)),
+                          const SizedBox(height: 8),
+                          Text(
+                            s.name,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  );
+                },
               ),
-            );
-          },
-        ),
       ),
     );
   }
@@ -143,9 +141,7 @@ class _StudentSelectionScreenState extends State<StudentSelectionScreen> {
             keyboardType: TextInputType.number,
             obscureText: true,
             maxLength: 6,
-            decoration: const InputDecoration(
-              hintText: "Enter your PIN",
-            ),
+            decoration: const InputDecoration(hintText: "Enter your PIN"),
           ),
           actions: [
             TextButton(

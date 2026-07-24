@@ -17,9 +17,7 @@ class WordTimingService {
     var count = vowelGroups;
 
     // Silent trailing "e" (e.g. "ate", "like") doesn't add a syllable.
-    if (normalized.endsWith('e') &&
-        !normalized.endsWith('le') &&
-        count > 1) {
+    if (normalized.endsWith('e') && !normalized.endsWith('le') && count > 1) {
       count -= 1;
     }
 
@@ -30,7 +28,8 @@ class WordTimingService {
   /// a sane range so a single very long word can't hang the mic indefinitely.
   Duration recordingDurationFor(String word) {
     final syllables = syllableCount(word);
-    final scaled = _basePerSyllable * syllables + const Duration(milliseconds: 1100);
+    final scaled =
+        _basePerSyllable * syllables + const Duration(milliseconds: 1100);
 
     if (scaled < _minDuration) return _minDuration;
     if (scaled > _maxDuration) return _maxDuration;

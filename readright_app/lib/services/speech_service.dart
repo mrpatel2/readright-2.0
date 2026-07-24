@@ -61,7 +61,7 @@ class SpeechService {
       print('❌ Audio recording failed to stop properly.');
       return null;
     }
-    
+
     final pcmFile = File(result);
     if (!await pcmFile.exists()) {
       print('❌ PCM file not found at path: $result');
@@ -76,7 +76,7 @@ class SpeechService {
       channels: 1,
       bitsPerSample: 16,
     );
-    
+
     // Save the WAV file
     final wavFile = File(wavPath);
     await wavFile.writeAsBytes(wavData);
@@ -92,11 +92,11 @@ class SpeechService {
   // WAV ENCODER — Microsoft-correct format for Azure Speech REST API
   // ---------------------------------------------------------------------------
   Uint8List _pcmToWav(
-      Uint8List pcm, {
-        required int sampleRate,
-        required int channels,
-        required int bitsPerSample,
-      }) {
+    Uint8List pcm, {
+    required int sampleRate,
+    required int channels,
+    required int bitsPerSample,
+  }) {
     final byteRate = sampleRate * channels * (bitsPerSample ~/ 8);
     final blockAlign = channels * (bitsPerSample ~/ 8);
 

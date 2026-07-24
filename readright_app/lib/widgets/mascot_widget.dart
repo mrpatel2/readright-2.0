@@ -34,13 +34,15 @@ class _MascotWidgetState extends State<MascotWidget>
       duration: const Duration(milliseconds: 2000),
     );
 
-    _bounceAnimation = Tween<double>(begin: -8.0, end: 8.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _bounceAnimation = Tween<double>(
+      begin: -8.0,
+      end: 8.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
-    _rotateAnimation = Tween<double>(begin: -0.05, end: 0.05).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _rotateAnimation = Tween<double>(
+      begin: -0.05,
+      end: 0.05,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
 
     if (widget.animated) {
       _controller.repeat(reverse: true);
@@ -120,10 +122,7 @@ class _MascotWidgetState extends State<MascotWidget>
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Colors.orange.shade300,
-            Colors.orange.shade600,
-          ],
+          colors: [Colors.orange.shade300, Colors.orange.shade600],
         ),
         shape: BoxShape.circle,
         boxShadow: [

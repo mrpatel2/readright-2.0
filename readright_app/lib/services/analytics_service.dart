@@ -72,9 +72,15 @@ class AnalyticsService {
     }
 
     // Calculate average scores
-    final double totalAccuracy = allAttempts.map((a) => a.accuracy).reduce((a, b) => a + b);
-    final double totalFluency = allAttempts.map((a) => a.fluency).reduce((a, b) => a + b);
-    final double totalCompleteness = allAttempts.map((a) => a.completeness).reduce((a, b) => a + b);
+    final double totalAccuracy = allAttempts
+        .map((a) => a.accuracy)
+        .reduce((a, b) => a + b);
+    final double totalFluency = allAttempts
+        .map((a) => a.fluency)
+        .reduce((a, b) => a + b);
+    final double totalCompleteness = allAttempts
+        .map((a) => a.completeness)
+        .reduce((a, b) => a + b);
 
     // Identify problem words
     final Map<String, int> incorrectCounts = {};
@@ -104,14 +110,26 @@ class AnalyticsService {
     final wordListService = WordListService(progressService);
     final attempts = await progressService.getAllAttempts();
     final currentList = await wordListService.loadCurrentList();
-    
+
     if (attempts.isEmpty) {
-      return StudentAnalytics(averageAccuracy: 0, averageFluency: 0, averageCompleteness: 0, masteredWords: 0, totalWords: 0);
+      return StudentAnalytics(
+        averageAccuracy: 0,
+        averageFluency: 0,
+        averageCompleteness: 0,
+        masteredWords: 0,
+        totalWords: 0,
+      );
     }
-    
-    final double totalAccuracy = attempts.map((a) => a.accuracy).reduce((a, b) => a + b);
-    final double totalFluency = attempts.map((a) => a.fluency).reduce((a, b) => a + b);
-    final double totalCompleteness = attempts.map((a) => a.completeness).reduce((a, b) => a + b);
+
+    final double totalAccuracy = attempts
+        .map((a) => a.accuracy)
+        .reduce((a, b) => a + b);
+    final double totalFluency = attempts
+        .map((a) => a.fluency)
+        .reduce((a, b) => a + b);
+    final double totalCompleteness = attempts
+        .map((a) => a.completeness)
+        .reduce((a, b) => a + b);
 
     final masteredCount = currentList.where((w) => w.mastered).length;
 

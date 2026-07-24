@@ -19,10 +19,7 @@ class LoginScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Colors.orange.shade50,
-              Colors.white,
-            ],
+            colors: [Colors.orange.shade50, Colors.white],
           ),
         ),
         child: SafeArea(
@@ -33,10 +30,7 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Tiger mascot
-                  const MascotWidget(
-                    size: 140,
-                    animated: true,
-                  ),
+                  const MascotWidget(size: 140, animated: true),
                   const SizedBox(height: 16),
 
                   // App name
@@ -135,7 +129,7 @@ class LoginScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (_) =>
-                          const TeacherAuthScreen(isSignup: true),
+                              const TeacherAuthScreen(isSignup: true),
                         ),
                       );
                     },

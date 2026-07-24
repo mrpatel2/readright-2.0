@@ -14,10 +14,12 @@ class TeacherStudentPickerScreen extends StatefulWidget {
   });
 
   @override
-  State<TeacherStudentPickerScreen> createState() => _TeacherStudentPickerScreenState();
+  State<TeacherStudentPickerScreen> createState() =>
+      _TeacherStudentPickerScreenState();
 }
 
-class _TeacherStudentPickerScreenState extends State<TeacherStudentPickerScreen> {
+class _TeacherStudentPickerScreenState
+    extends State<TeacherStudentPickerScreen> {
   bool loading = true;
   List<Student> students = [];
 
@@ -43,9 +45,7 @@ class _TeacherStudentPickerScreenState extends State<TeacherStudentPickerScreen>
   @override
   Widget build(BuildContext context) {
     if (loading) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(

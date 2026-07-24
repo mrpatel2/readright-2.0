@@ -43,8 +43,14 @@ class _TestStudentHomeState extends State<TestStudentHome> {
         onTap: _onTap,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.mic), label: 'Practice'),
-          BottomNavigationBarItem(icon: Icon(Icons.feedback), label: 'Feedback'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Progress'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.feedback),
+            label: 'Feedback',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart),
+            label: 'Progress',
+          ),
         ],
       ),
     );
@@ -53,9 +59,7 @@ class _TestStudentHomeState extends State<TestStudentHome> {
 
 void main() {
   testWidgets('StudentHome switches tabs correctly', (tester) async {
-    await tester.pumpWidget(
-      MaterialApp(home: TestStudentHome()),
-    );
+    await tester.pumpWidget(MaterialApp(home: TestStudentHome()));
 
     // Start on tab 0
     expect(find.text('PracticeMock'), findsOneWidget);

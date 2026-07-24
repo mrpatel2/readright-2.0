@@ -13,13 +13,17 @@ class StarBurst extends StatefulWidget {
   State<StarBurst> createState() => _StarBurstState();
 }
 
-class _StarBurstState extends State<StarBurst> with SingleTickerProviderStateMixin {
+class _StarBurstState extends State<StarBurst>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _ctl;
 
   @override
   void initState() {
     super.initState();
-    _ctl = AnimationController(vsync: this, duration: const Duration(milliseconds: 900));
+    _ctl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 900),
+    );
     if (widget.play) _ctl.forward();
   }
 
@@ -47,7 +51,10 @@ class _StarBurstState extends State<StarBurst> with SingleTickerProviderStateMix
         builder: (context, child) {
           final t = Curves.easeOut.transform(_ctl.value);
           return CustomPaint(
-            painter: _StarPainter(progress: t, color: Theme.of(context).colorScheme.primary),
+            painter: _StarPainter(
+              progress: t,
+              color: Theme.of(context).colorScheme.primary,
+            ),
           );
         },
       ),
@@ -63,7 +70,8 @@ class _StarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = color.withOpacity((1 - progress) * 0.9 + 0.1);
+    final paint = Paint()
+      ..color = color.withOpacity((1 - progress) * 0.9 + 0.1);
     final center = Offset(size.width / 2, size.height / 2);
 
     // Draw 8 radiating small circles to simulate burst
@@ -78,5 +86,6 @@ class _StarPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant _StarPainter oldDelegate) => oldDelegate.progress != progress || oldDelegate.color != color;
+  bool shouldRepaint(covariant _StarPainter oldDelegate) =>
+      oldDelegate.progress != progress || oldDelegate.color != color;
 }

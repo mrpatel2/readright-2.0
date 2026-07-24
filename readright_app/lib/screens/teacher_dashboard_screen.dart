@@ -8,7 +8,7 @@ import 'manage_word_list_screen.dart';
 import 'student_progress_screen.dart';
 import 'class_management_screen.dart';
 import 'class_analytics_screen.dart';
-import 'story_spike_screen.dart';
+import 'story_builder_screen.dart';
 
 /// Professional dashboard for teachers
 class TeacherDashboardScreen extends StatelessWidget {
@@ -201,17 +201,22 @@ class TeacherDashboardScreen extends StatelessWidget {
 
                 const SizedBox(height: 16),
 
-                // ----- AI STORY SPIKE (M2 de-risk test, not final UI) -----
+                // ----- AI STORY BUILDER -----
                 _buildActionCard(
                   context: context,
                   icon: Icons.auto_stories,
-                  title: 'AI Story Spike (test)',
-                  description: 'M2 spike: prove the AI story pipeline works end to end',
+                  title: 'AI Story Builder',
+                  description: 'Generate a leveled, interest-driven Dolch story for a student',
                   color: Colors.teal,
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const StorySpikeScreen()),
+                      MaterialPageRoute(
+                        builder: (_) => StoryBuilderScreen(
+                          teacherId: teacherId,
+                          classId: "default_class",
+                        ),
+                      ),
                     );
                   },
                 ),

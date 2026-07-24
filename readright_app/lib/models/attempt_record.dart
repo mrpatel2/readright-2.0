@@ -15,6 +15,10 @@ class AttemptRecord {
   final double completeness;
   final String recognizedText;
 
+  // Which activity produced this attempt: pronunciation | fill_blank | story_reading.
+  // See PRD_Milestone2.md section 2, data model.
+  final String source;
+
   AttemptRecord({
     required this.word,
     required this.listName,
@@ -27,6 +31,7 @@ class AttemptRecord {
     this.fluency = 0,
     this.completeness = 0,
     this.recognizedText = "",
+    this.source = "pronunciation",
   });
 
   Map<String, dynamic> toJson() => {
@@ -41,6 +46,7 @@ class AttemptRecord {
     'fluency': fluency,
     'completeness': completeness,
     'recognizedText': recognizedText,
+    'source': source,
   };
 
   factory AttemptRecord.fromJson(Map<String, dynamic> json) {
@@ -56,6 +62,7 @@ class AttemptRecord {
       fluency: (json['fluency'] ?? 0).toDouble(),
       completeness: (json['completeness'] ?? 0).toDouble(),
       recognizedText: json['recognizedText'] ?? "",
+      source: json['source'] ?? "pronunciation",
     );
   }
 }

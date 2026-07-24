@@ -13,6 +13,7 @@ import '../models/student.dart';
 import 'practice_screen.dart';
 import 'feedback_screen.dart';
 import 'progress_screen.dart';
+import 'fill_blank_game_screen.dart';
 
 class StudentHome extends StatefulWidget {
   final String studentId;
@@ -40,6 +41,7 @@ class _StudentHomeState extends State<StudentHome> {
     // Build tab screens using the current student's ID.
     _screens = [
       PracticeScreen(studentId: widget.studentId),
+      FillBlankGameScreen(studentId: widget.studentId),
       FeedbackScreen(studentId: widget.studentId),
       ProgressScreen(studentId: widget.studentId),
     ];
@@ -78,6 +80,10 @@ class _StudentHomeState extends State<StudentHome> {
           BottomNavigationBarItem(
             icon: Icon(Icons.mic),
             label: 'Practice',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.extension),
+            label: 'Game',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.feedback),

@@ -31,7 +31,10 @@ class SpeechService {
   //  - 16kHz sample rate
   //  - Proper RIFF WAV header
   // ---------------------------------------------------------------------------
-  Future<String?> recordAudio({required String studentId}) async {
+  Future<String?> recordAudio({
+    required String studentId,
+    Duration duration = const Duration(seconds: 3),
+  }) async {
     final dir = await getApplicationDocumentsDirectory();
     final recordingsDir = Directory('${dir.path}/recordings/$studentId');
     if (!await recordingsDir.exists()) {
@@ -51,8 +54,7 @@ class SpeechService {
       path: pcmPath,
     );
 
-    // Record for 3 seconds
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(duration);
     final result = await _recorder.stop();
 
     if (result == null) {

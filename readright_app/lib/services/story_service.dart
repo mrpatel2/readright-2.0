@@ -31,7 +31,14 @@ class StoryService {
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Story generation failed (${response.statusCode}): ${response.body}');
+      String message = 'Story generation failed (${response.statusCode}).';
+      try {
+        final body = jsonDecode(response.body) as Map<String, dynamic>;
+        if (body['error'] is String) message = body['error'] as String;
+      } catch (_) {
+        // Non-JSON error body (e.g. the proxy is unreachable) — keep the default message.
+      }
+      throw Exception(message);
     }
 
     final data = jsonDecode(response.body) as Map<String, dynamic>;

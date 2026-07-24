@@ -12,6 +12,7 @@ import '../services/word_list_service.dart';
 import '../services/local_progress_service.dart';
 import '../services/cloud_assessment_service.dart';
 import '../services/student_session_service.dart';
+import '../services/word_timing_service.dart';
 import '../widgets/mascot_widget.dart';
 import '../widgets/record_placeholder.dart';
 import '../widgets/star_burst.dart';
@@ -32,6 +33,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
   Student? _student;
 
   final CloudAssessmentService _cloud = CloudAssessmentService.instance;
+  final WordTimingService _timing = WordTimingService();
 
   List<WordItem> _wordList = [];
   int _currentIndex = 0;
@@ -147,7 +149,10 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
     final currentWord = _wordList[_currentIndex];
 
-    final audioPath = await _speechService.recordAudio(studentId: widget.studentId);
+    final audioPath = await _speechService.recordAudio(
+      studentId: widget.studentId,
+      duration: _timing.recordingDurationFor(currentWord.word),
+    );
     if (audioPath == null) {
       setState(() {
         _feedback = 'Recording failed. Try again! 🎤';
@@ -163,6 +168,21 @@ class _PracticeScreenState extends State<PracticeScreen> {
       recognizedWord: '',
       audioBytes: wavBytes,
     );
+
+    // The assessor couldn't actually grade this attempt (e.g. Azure was
+    // unreachable) — never turn that into a false "wrong". Let the student
+    // retry for free instead of recording a failed attempt.
+    if (!assessment.graded) {
+      try {
+        final file = File(audioPath);
+        if (await file.exists()) await file.delete();
+      } catch (_) {}
+      setState(() {
+        _feedback = "We couldn't hear that clearly. Try again! 🎤";
+        _isRecording = false;
+      });
+      return;
+    }
 
     final score = assessment.score;
     final isCorrect = score >= 60;
